@@ -465,6 +465,10 @@ class GrpcUnconverterGenerator(GrpcConverterGenerator):
 
                 if name == "scriptPubKey":
                     name = "script_pub_key"
+                    print(typ)
+                # if name == "lightning_dir":
+                #     name = "lightning-dir"
+                #     print(";;;;;;;;;;;;;;;;")
 
                 rhs = {
                     'u8': f'c.{name} as u8',

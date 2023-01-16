@@ -150,9 +150,9 @@ def gen_primitive(p):
     if p.deprecated:
         defi += "    #[deprecated]\n"
     if p.required:
-        defi += f"    #[serde(alias = \"{org}\")]\n    pub {p.name}: {typename},\n"
+        defi += f"    #[serde(rename = \"{org}\")]\n    pub {p.name}: {typename},\n"
     else:
-        defi += f"    #[serde(alias = \"{org}\", skip_serializing_if = \"Option::is_none\")]\n    pub {p.name}: Option<{typename}>,\n"
+        defi += f"    #[serde(rename = \"{org}\", skip_serializing_if = \"Option::is_none\")]\n    pub {p.name}: Option<{typename}>,\n"
 
     return defi, decl
 
@@ -181,9 +181,9 @@ def gen_array(a):
     if a.deprecated:
         defi += "    #[deprecated]\n"
     if a.required:
-        defi += f"    #[serde(alias = \"{alias}\")]\n    pub {name}: {'Vec<'*a.dims}{itemtype}{'>'*a.dims},\n"
+        defi += f"    #[serde(rename = \"{alias}\")]\n    pub {name}: {'Vec<'*a.dims}{itemtype}{'>'*a.dims},\n"
     else:
-        defi += f"    #[serde(alias = \"{alias}\", skip_serializing_if = \"crate::is_none_or_empty\")]\n    pub {name}: Option<{'Vec<'*a.dims}{itemtype}{'>'*a.dims}>,\n"
+        defi += f"    #[serde(rename = \"{alias}\", skip_serializing_if = \"crate::is_none_or_empty\")]\n    pub {name}: Option<{'Vec<'*a.dims}{itemtype}{'>'*a.dims}>,\n"
 
     return (defi, decl)
 
@@ -206,9 +206,9 @@ def gen_composite(c) -> Tuple[str, str]:
     if c.deprecated:
         defi += "    #[deprecated]\n"
     if c.required:
-        defi += f"    #[serde(alias = \"{c.name.name}\")]\n    pub {c.name}: {c.typename},\n"
+        defi += f"    #[serde(rename = \"{c.name.name}\")]\n    pub {c.name}: {c.typename},\n"
     else:
-        defi += f"    #[serde(alias = \"{c.name.name}\", skip_serializing_if = \"Option::is_none\")]\n    pub {c.name}: Option<{c.typename}>,\n"
+        defi += f"    #[serde(rename = \"{c.name.name}\", skip_serializing_if = \"Option::is_none\")]\n    pub {c.name}: Option<{c.typename}>,\n"
 
     return defi, r
 

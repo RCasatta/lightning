@@ -251,7 +251,7 @@ fn test_getinfo() {
     let j2 = serde_json::to_value(u2).unwrap();
     println!("{}", j);
     println!("{}", j2);
-    // assert_eq!(j, j2); // lighting-dir != lighting_dir
+    assert_eq!(j, j2); // lighting-dir != lighting_dir
 }
 
 #[test]
